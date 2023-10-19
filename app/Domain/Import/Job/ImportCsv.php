@@ -30,7 +30,7 @@ class ImportCsv implements ShouldQueue
                 continue;
             }
 
-            ImportCsvRow::dispatch($line);
+            ImportCsvRow::dispatch($line)->onQueue("import");
         }
     }
 }
