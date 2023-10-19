@@ -60,7 +60,7 @@ class ImportCsvRow implements ShouldQueue
         } catch (\Throwable $exception) {
             Log::info($exception->getMessage());
             Log::info($exception->getTraceAsString());
-            Log::info(print_r($line, true));
+            Log::info(print_r($this->csvLine, true));
         }
     }
 }

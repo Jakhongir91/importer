@@ -13,6 +13,6 @@ class ImportCsv extends Command
     public function handle()
     {
         $filePath = __DIR__ . "/../../../dump/large-1mln-rows.csv";
-        ImportCsvJob::dispatch($filePath);
+        ImportCsvJob::dispatch($filePath)->onQueue("import");
     }
 }
