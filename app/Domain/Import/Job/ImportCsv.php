@@ -23,6 +23,9 @@ class ImportCsv implements ShouldQueue
     {
         $fileStream = fopen($this->filePath, "r");
 
+        $count = 0;
+        $portion = [];
+
         $skipFirstRow = true;
         while (($line = fgetcsv($fileStream)) !== false) {
             if ($skipFirstRow) {
@@ -30,7 +33,13 @@ class ImportCsv implements ShouldQueue
                 continue;
             }
 
-            ImportCsvRow::dispatch($line)->onQueue("import");
+            $portion[] = $line;
+            $count ++;
+
+            if ($count % 100 === 0) {
+                ImportPortion::dispatch($portion, $count)->onQueue("import");
+                $portion = [];
+            }
         }
     }
 }
