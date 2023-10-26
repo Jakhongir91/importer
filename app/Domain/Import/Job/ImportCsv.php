@@ -13,10 +13,12 @@ class ImportCsv implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private string $filePath;
+    private string $uuid;
 
-    public function __construct(string $filePath)
+    public function __construct(string $filePath, string $uuid)
     {
         $this->filePath = $filePath;
+        $this->uuid = $uuid;
     }
 
     public function handle()
