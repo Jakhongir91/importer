@@ -43,5 +43,9 @@ class ImportCsv implements ShouldQueue
                 $portion = [];
             }
         }
+
+        if (! empty($portion)) {
+            ImportPortion::dispatch($portion, $count)->onQueue("import");
+        }
     }
 }
